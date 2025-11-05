@@ -2,7 +2,7 @@
 namespace App\Providers;
 
 class Validator {
-    private $errors = ['Veillez remplir les champs de nouveau'];
+    private $errors = Array();
     private $key;
     private $value;
     private $name;
@@ -54,13 +54,18 @@ class Validator {
         return $this;
     }
 
+    public function exist() {
+        $this->errors[$this->key]="Veillez remplir les champs à nouveau.";  
+        return $this;
+    }
+
     //regles fin
 
     public function isSuccess(){
         if(empty($this->errors)) return true;
     }
 
-    public function getErrors(){
+    public function getErrors(){        
         if(!$this->isSuccess()) return $this->errors;
     }
 }

@@ -186,12 +186,13 @@ class ClientController{
         $validator = new Validator;
         $validator->field('nom', $data['nom'])->min(2)->max(45);        
         $validator->field('adresse', $data['adresse'])->min(3)->max(45);
-        $validator->field('telephon', $data['telephone'])->max(20);
+        $validator->field('telephon', $data['telephone'])->required()->max(20);
         $validator->field('courriel', $data['courriel'])->email()->min(3)->max(45);
         $client = new Client; 
         $idMail = $client->selectValueId('id', 'courriel', $data['courriel']);
         $idNom = $client->selectValueId('id', 'nom', $data['nom']); 
-        if($validator->isSuccess() && !$idMail && !$idNom){                       
+        if($idMail && $idNom) $validator->exist(); 
+        if($validator->isSuccess() && !$idMail && !$idNom){                               
             $client->insert($data);
             return View::redirect('client/login');
         }else{
