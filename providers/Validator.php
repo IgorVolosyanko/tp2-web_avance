@@ -2,7 +2,7 @@
 namespace App\Providers;
 
 class Validator {
-    private $errors = array();
+    private $errors = ['Veillez remplir les champs de nouveau'];
     private $key;
     private $value;
     private $name;
