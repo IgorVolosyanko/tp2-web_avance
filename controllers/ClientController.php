@@ -191,8 +191,6 @@ class ClientController{
         $client = new Client; 
         $idMail = $client->selectValueId('id', 'courriel', $data['courriel']);
         $idNom = $client->selectValueId('id', 'nom', $data['nom']); 
-        var_dump(!$idMail);
-        var_dump(!$idNom);
         if($validator->isSuccess() && !$idMail && !$idNom){                       
             $client->insert($data);
             return View::redirect('client/login');
